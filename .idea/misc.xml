@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/auth-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/config-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/ent-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ent-client2/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/discovery-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/gest-user-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/gestionnote-ent/pom.xml" />
+        <option value="$PROJECT_DIR$/gestioninterventions-ent/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="19" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

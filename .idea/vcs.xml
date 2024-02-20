@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/config-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/discovery-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ent-client2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gateway-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gest-user-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gestioninterventions-ent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gestionnote-ent" vcs="Git" />
+  </component>
+</project>
