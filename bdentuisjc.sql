@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `bdentuisjc` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `bdentuisjc`;
 USE `bdentuisjc`;
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
@@ -28,7 +28,7 @@ CREATE TABLE `application` (
   `apllicationid` bigint NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`apllicationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `droit` (
   PRIMARY KEY (`droitid`),
   KEY `codeapplicationid` (`codeapplicationid`),
   CONSTRAINT `droit_ibfk_1` FOREIGN KEY (`codeapplicationid`) REFERENCES `application` (`apllicationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=102855 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102855 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `role` (
   `libelle` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`roleid`)
-) ENGINE=InnoDB AUTO_INCREMENT=103103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103103 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `role_droit` (
   KEY `code_droitid` (`code_droitid`),
   CONSTRAINT `role_droit_ibfk_1` FOREIGN KEY (`code_roleid`) REFERENCES `role` (`roleid`),
   CONSTRAINT `role_droit_ibfk_2` FOREIGN KEY (`code_droitid`) REFERENCES `droit` (`droitid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
   `classe` varchar(50) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=209 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `user_info` (
   `role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +194,7 @@ CREATE TABLE `user_role` (
   KEY `code_role` (`code_role`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`code_userid`) REFERENCES `user` (`userid`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`code_role`) REFERENCES `role` (`roleid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ DROP TABLE IF EXISTS `users_id_seq`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users_id_seq` (
   `next_val` bigint DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
