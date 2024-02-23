@@ -123,6 +123,8 @@ public class UserController {
         return new ModelAndView("pages/gestion-trombinoscope/dashboard-trombinoscope");
 
     }
+
+    
     @GetMapping("/trombinoscope/information/etudiant")
     public ModelAndView trombinoscopeInformationEtudiant(Model model, HttpSession session){
         ModalWithHttpHeader.model(model, session);
