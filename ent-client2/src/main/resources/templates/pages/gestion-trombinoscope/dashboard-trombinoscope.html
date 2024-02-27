@@ -69,28 +69,256 @@
       <div class="main-panel">
 
         <div class="content-wrapper">
-          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  <span id="title_label">Filtrez les informations des Utilisateurs</span>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="form-group row mx-auto">
+                      <div class="col-md-4" id="population-section">
+                        <label for="population-class">Population</label>
+                        <select class="form-control form-control-sm" id="population-class"
+                          onchange="updatePopulation()">
+                          <option>Personnel</option>
+                          <option>Etudiant</option>
+                          <option>Enseignant</option>
+                          <option value="*" selected>Tous</option>
+                        </select>
+                      </div>
+
+                      <div class="col-md-4" id="nom-section">
+                        <label for="nom-class" id="nom-utilisateur">Nom Utilisateur</label>
+                        <input type="text" class="form-control form-control-sm" id="nom-class"
+                          placeholder="Filtrez en fonction du nom...">
+                      </div>
+
+                      <div class="col-md-4" id="prenom-section">
+                        <label for="prenom-class" id="prenom-utilisateur">Prénom Utilisateur</label>
+                        <input type="text" class="form-control form-control-sm" id="prenom-class"
+                          placeholder="Filtrez en fonction du prénom...">
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row mx-auto">
+                      <span id="etudiant-filter" class="row d-none">
+
+                        <div class="col-md-2" id="cycle-section">
+                          <label for="cycle-class">Cycle</label>
+                          <select class="form-control form-control-sm" id="cycle-class" onchange="updateCycle()">
+                            <option>Ingenieur</option>
+                            <option>Licence</option>
+                            <option>Management</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+
+
+                        <div class="col-md-2" id="niveau-etude-section">
+                          <label for="niveau-etude-class">Niveau Etude</label>
+                          <select class="form-control form-control-sm" id="niveau-etude-class"
+                            onchange="updateNiveauEtude()">
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+                        
+                        <div class="col-md-4" id="specialite-section">
+                          <label for="specialite-class" id="specialite-utilisateur">Specialite Etudiant</label>
+                          <select class="form-control form-control-sm" id="specialite-class" onchange="updateSpecialite()">
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-4" id="section-section">
+                          <label for="section-class" id="section-utilisateur">Section</label>
+                          <select class="form-control form-control-sm" id="section-class" onchange="updateSection()">
+                            <option>Anglophone</option>
+                            <option>Francophone</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+                      </span>
+
+
+                      <span id="personnel-filter" class="row d-none">
+                        <div class="col-md-4" id="prenom-section">
+                          <label for="role-personnel-class" id="prenom-utilisateur">Role du Personnel</label>
+                          <select class="form-control form-control-sm" id="role-personnel-class">
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+
+                        
+                        <div class="col-md-4" id="prenom-section">
+                          <label for="role-personnel-class" id="prenom-utilisateur">Adresse du Personnel</label>
+                          <input type="text" class="form-control form-control-sm" id="adresse-personnel-class"
+                          placeholder="Filtrez en fonction de l'adresse du personnel...">
+                        </div>
+
+                        <!-- <div class="col-md-12" id="role-section">
+                          <select class="form-control form-control-sm" id="role-class" onchange="updateRole()">
+                            <option selected>Selectionnez le role de ce personnel</option>
+                            <option>Anglophone</option>
+                            <option>Francophone</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div> -->
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="container mt-5">
+            <div class="main-body">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm form-group">
+                <div class="col mb-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div class="col mb-5">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div class="col mb-5" data-toggle="modal" data-target=".bd-example-modal-lg">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
+                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                      <h5 class="card-title">TAGNE Elohim</h5>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="row fixed-bottom p-3">
+            <div class="col-12 text-center mt-4 mt-sm-5 mx-auto">
+              <ul class="pagination justify-content-center mb-0">
+                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span
+                    class="sr-only">(current)</span></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">25</a></li>
+                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+              </ul>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-white fw-bold">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <p>Modal body text goes here.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <!-- main-panel ends -->
   </div>
-  <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 
@@ -125,6 +353,54 @@
   <!-- Custom js for this page-->
   <script src="../../js/dashboard.js"></script>
   <script src="../../js/Chart.roundedBarCharts.js"></script>
+
+  <script>
+    function updatePopulation() {
+      var population = $('#population-class').val();
+      var nom_label = $('#nom-utilisateur');
+      var prenom_label = $('#prenom-utilisateur');
+      var titre_search = $('#title_label');
+
+      if (population === 'Etudiant') {
+        nom_label.text("Nom Etudiant");
+        prenom_label.text("Prénom Etudiant");
+        titre_search.text("Filtrez les informations des Etudiants");
+
+        $('#etudiant-filter').removeClass("d-none");
+        $('#personnel-filter').addClass("d-none");
+
+      } else if (population == 'Personnel') {
+        nom_label.text("Nom Personnel");
+        prenom_label.text("Prénom Personnel");
+        titre_search.text("Filtrez les informations du Personnel");
+        
+
+        $('#etudiant-filter').addClass("d-none");
+        $('#personnel-filter').removeClass("d-none");
+      }
+      else if (population == 'Enseignant') {
+        nom_label.text("Nom Enseignant");
+        prenom_label.text("Prénom Enseignant");
+        titre_search.text("Filtrez les informations des Enseignants");
+        
+        $('#etudiant-filter').addClass("d-none");
+        $('#personnel-filter').addClass("d-none");
+      }
+      else  {
+        nom_label.text("Nom Utilisateur");
+        prenom_label.text("Prénom Utilisateur");
+        titre_search.text("Filtrez les informations des Utilisateurs");
+        
+        $('#etudiant-filter').addClass("d-none");
+        $('#personnel-filter').addClass("d-none");
+      }
+    }
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+  </script>
 
 
 </body>
