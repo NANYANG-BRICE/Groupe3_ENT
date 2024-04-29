@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+
 public class EtudiantController {
 
     @GetMapping("/listEtudiant")

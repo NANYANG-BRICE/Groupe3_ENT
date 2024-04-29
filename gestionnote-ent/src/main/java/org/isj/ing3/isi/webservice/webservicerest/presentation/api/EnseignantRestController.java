@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/enseignant")
 @Slf4j
+@CrossOrigin("*")
 
 public class EnseignantRestController {
 

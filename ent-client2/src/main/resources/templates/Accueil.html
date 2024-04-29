@@ -38,7 +38,7 @@
                                 <i class="bi bi-bookmark-x-fill" style="color:#4b49ac ; "></i>
                             </div>
                             <div class="heading mb-3" >
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }" >
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant'  || session.authorithies[0].authority =='User' }" >
                                     <span> Notes</span>
                                 </div>
                                 <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }" >
@@ -62,7 +62,7 @@
                                 <i class="bi bi-book-fill" style="color:#4b49ac ; "></i>
                             </div>
                             <div class="heading mb-3">
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }">
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' || session.authorithies[0].authority =='User' }">
                                     <span> Documents</span>
                                 </div>
                                 <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }">
@@ -83,29 +83,6 @@
                     <div class="card card-special">
                         <div class="card-body">
                             <div class="back-icon p-2 mb-3">
-                                <i class="bi bi-archive-fill" style="color:#4b49ac ; "></i>
-                            </div>
-                            <div class="heading mb-3">
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }">
-                                    Gestion <br><span> de la Bibliotheque</span>
-                                </div>
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }">
-                                    <span>Bibliotheque</span>
-                                </div>
-                                <div class="description">
-                                    <p class="color-light">cliquez sur la fleche pour avoir accès aux ouvrages et aux matériels mis à votre disposition par l'institut. </p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <a th:href="@{gestDocuments/gesDoc.html}" class="val">Empruntez un livre ici <i class="bi bi-arrow-right" style="font-size:18px;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3  grid-margin stretch-card ">
-                    <div class="card card-special">
-                        <div class="card-body">
-                            <div class="back-icon p-2 mb-3">
                                 <i class="bi bi-alarm-fill" style="color:#4b49ac ; "></i>
                             </div>
                             <div class="heading mb-3">
@@ -113,7 +90,7 @@
                                     Gestion <br><span> des Horaires</span>
                                 </div>
 
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }">
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant'  || session.authorithies[0].authority =='User' }">
                                     <span> Horaires</span>
                                 </div>
                                 <div class="description">
@@ -133,7 +110,7 @@
                                 <i class="bi bi-file-bar-graph-fill" style="color:#4b49ac ; "></i>
                             </div>
                             <div class="heading mb-3">
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }">
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant'  || session.authorithies[0].authority =='User' }">
                                     <span>Interventions</span>
                                 </div>
                                 <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }">
@@ -161,7 +138,7 @@
                                 <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }">
                                     Gestion <br><span> de la messagerie</span>
                                 </div>
-                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant' }">
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant'  || session.authorithies[0].authority =='User' }">
                                     <span>Messagerie</span>
                                 </div>
                                 <div class="description">
@@ -195,6 +172,29 @@
                     </div>
                 </div>
 
+                <div class="col-md-3  grid-margin stretch-card ">
+                    <div class="card card-special">
+                        <div class="card-body">
+                            <div class="back-icon p-2 mb-3">
+                                <i class="bi bi-archive-fill" style="color:#4b49ac ; "></i>
+                            </div>
+                            <div class="heading mb-3">
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Admin' }">
+                                    Gestion <br><span> de la Bibliotheque</span>
+                                </div>
+                                <div class="card-title" th:if="${session.authorithies[0].authority =='Etudiant'  || session.authorithies[0].authority =='User'}">
+                                    <span>Bibliotheque</span>
+                                </div>
+                                <div class="description">
+                                    <p class="color-light">cliquez sur la fleche pour avoir accès aux ouvrages et aux matériels mis à votre disposition par l'institut. </p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{gestDocuments/gesDoc.html}" class="val">Empruntez un livre ici <i class="bi bi-arrow-right" style="font-size:18px;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

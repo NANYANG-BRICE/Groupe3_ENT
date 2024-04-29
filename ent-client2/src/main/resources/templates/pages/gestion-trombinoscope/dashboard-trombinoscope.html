@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestion des Horaires</title>
+  <title>Trombinoscope</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/feather/feather.css">
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -69,40 +69,41 @@
       <div class="main-panel">
 
         <div class="content-wrapper">
-          <div class="accordion" id="accordionExample">
+          <div class="accordion mb-4" id="accordionExample">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  <span id="title_label">Filtrez les informations des Utilisateurs</span>
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed bg-primary fw-bold text-white" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                  aria-controls="collapseTwo">
+                  FILTREZ LES INFORMATIONS DES UTILISATEURS
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
+
+              <div id="collapseTwo" class="accordion-collapse collapse show  text-dark" aria-labelledby="headingTwo"
+                   data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <div class="row">
                     <div class="form-group row mx-auto">
                       <div class="col-md-4" id="population-section">
                         <label for="population-class">Population</label>
                         <select class="form-control form-control-sm" id="population-class"
-                          onchange="updatePopulation()">
+                                onchange="updatePopulation()">
                           <option>Personnel</option>
                           <option>Etudiant</option>
                           <option>Enseignant</option>
-                          <option value="*" selected>Tous</option>
+                          <option value="*" selected>Choix de la population</option>
                         </select>
                       </div>
-
-                      <div class="col-md-4" id="nom-section">
+                      <div class="col-md-4" id="nom-section" >
                         <label for="nom-class" id="nom-utilisateur">Nom Utilisateur</label>
                         <input type="text" class="form-control form-control-sm" id="nom-class"
-                          placeholder="Filtrez en fonction du nom...">
+                               placeholder="Filtrez en fonction du nom...">
                       </div>
 
-                      <div class="col-md-4" id="prenom-section">
+                      <div class="col-md-4" id="prenom-section" >
                         <label for="prenom-class" id="prenom-utilisateur">Prénom Utilisateur</label>
                         <input type="text" class="form-control form-control-sm" id="prenom-class"
-                          placeholder="Filtrez en fonction du prénom...">
+                               placeholder="Filtrez en fonction du prénom...">
                       </div>
                     </div>
 
@@ -113,9 +114,6 @@
                         <div class="col-md-2" id="cycle-section">
                           <label for="cycle-class">Cycle</label>
                           <select class="form-control form-control-sm" id="cycle-class" onchange="updateCycle()">
-                            <option>Ingenieur</option>
-                            <option>Licence</option>
-                            <option>Management</option>
                             <option value="*" selected>Tous</option>
                           </select>
                         </div>
@@ -124,23 +122,24 @@
                         <div class="col-md-2" id="niveau-etude-section">
                           <label for="niveau-etude-class">Niveau Etude</label>
                           <select class="form-control form-control-sm" id="niveau-etude-class"
-                            onchange="updateNiveauEtude()">
+                                  onchange="updateNiveauEtude()">
                             <option value="*" selected>Tous</option>
                           </select>
                         </div>
-                        
+
                         <div class="col-md-4" id="specialite-section">
                           <label for="specialite-class" id="specialite-utilisateur">Specialite Etudiant</label>
-                          <select class="form-control form-control-sm" id="specialite-class" onchange="updateSpecialite()">
+                          <select class="form-control form-control-sm" id="specialite-class"
+                                  onchange="updateSpecialite()">
                             <option value="*" selected>Tous</option>
                           </select>
                         </div>
 
                         <div class="col-md-4" id="section-section">
-                          <label for="section-class" id="section-utilisateur">Section</label>
-                          <select class="form-control form-control-sm" id="section-class" onchange="updateSection()">
-                            <option>Anglophone</option>
-                            <option>Francophone</option>
+                          <label for="section-sexe-class" id="section-utilisateur">Sexe</label>
+                          <select class="form-control form-control-sm" id="section-sexe-class" onchange="updateSexe()">
+                            <option value="MASCULIN">Masculin</option>
+                            <option value="FEMININ">Feminin</option>
                             <option value="*" selected>Tous</option>
                           </select>
                         </div>
@@ -148,169 +147,297 @@
 
 
                       <span id="personnel-filter" class="row d-none">
-                        <div class="col-md-4" id="prenom-section">
-                          <label for="role-personnel-class" id="prenom-utilisateur">Role du Personnel</label>
-                          <select class="form-control form-control-sm" id="role-personnel-class">
+                        <div class="col-md-4" id="statutP-section">
+                          <label for="section-sexe-class" id="statutP-utilisateur">Statut</label>
+                          <select class="form-control form-control-sm" id="section-statutP-class" onchange="updateStatutP()">
+                            <option value="ACTIVE">Active</option>
+                            <option value="NONACTIVE">Non Active</option>
                             <option value="*" selected>Tous</option>
                           </select>
                         </div>
-
-                        
-                        <div class="col-md-4" id="prenom-section">
-                          <label for="role-personnel-class" id="prenom-utilisateur">Adresse du Personnel</label>
-                          <input type="text" class="form-control form-control-sm" id="adresse-personnel-class"
-                          placeholder="Filtrez en fonction de l'adresse du personnel...">
-                        </div>
-
-                        <!-- <div class="col-md-12" id="role-section">
-                          <select class="form-control form-control-sm" id="role-class" onchange="updateRole()">
-                            <option selected>Selectionnez le role de ce personnel</option>
-                            <option>Anglophone</option>
-                            <option>Francophone</option>
+                        <div class="col-md-4" id="statutVieP-section">
+                          <label for="section-sexe-class" id="statutVieP-utilisateur">Statut Vie</label>
+                          <select class="form-control form-control-sm" id="section-statutVieP-class" onchange="updateStatutVieP()">
+                            <option value="ACTIVE">Active</option>
+                            <option value="NONACTIVE">Non Active</option>
                             <option value="*" selected>Tous</option>
                           </select>
-                        </div> -->
+                        </div>
+                        <div class="col-md-4" id="sexeP-section">
+                          <label for="section-sexe-class" id="sexeP-utilisateur">Sexe</label>
+                          <select class="form-control form-control-sm" id="section-sexeP-class" onchange="updateSexeP()">
+                            <option value="MASCULIN">Masculin</option>
+                            <option value="FEMININ">Feminin</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+                      </span>
+                      <span id="enseignants-filter" class="row d-none">
+                        <div class="col-md-4" id="statutE-section">
+                          <label for="section-statutE-class" id="statutE-utilisateur">Statut</label>
+                          <select class="form-control form-control-sm" id="section-statutE-class" onchange="updateStatutE()">
+                            <option value="ACTIVE">Active</option>
+                            <option value="NONACTIVE">Non Active</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4" id="statutVieE-section">
+                          <label for="section-statutVieE-class" id="statutVieE-utilisateur">Statut Vie</label>
+                          <select class="form-control form-control-sm" id="section-statutVieE-class" onchange="updateStatutVieE()">
+                            <option value="ACTIVE">Active</option>
+                            <option value="NONACTIVE">Non Active</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4" id="sexeE-section">
+                          <label for="section-sexeE-class" id="sexeE-utilisateur">Sexe</label>
+                          <select class="form-control form-control-sm" id="section-sexeE-class" onchange="updateSexeE()">
+                            <option value="MASCULIN">Masculin</option>
+                            <option value="FEMININ">Feminin</option>
+                            <option value="*" selected>Tous</option>
+                          </select>
+                        </div>
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
-          <br>
-          <br>
-          <div class="container mt-5">
-            <div class="main-body">
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm form-group">
-                <div class="col mb-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+            <p class="display-4 font-weight-bold" id="infos">
+              Cliquer sur le rectangle en haut ayant "Population" comme titre. Pour parcourir le trombinoscope
+            </p>
+            <p class="display-4 font-weight-bold" id="detailCycle"></p>
+            <p class="display-4 font-weight-bold" id="detailNiveau"></p>
+            <p class="display-4 font-weight-bold" id="detailSpecialite"></p>
+            <p class="display-4 font-weight-bold" id="detailSexe"></p>
+            <p class="display-4 font-weight-bold" id="detailStatutE"></p>
+            <p class="display-4 font-weight-bold" id="detailStatutVieE"></p>
+            <p class="display-4 font-weight-bold" id="detailSexeE"></p>
+            <p class="display-4 font-weight-bold" id="detailStatutP"></p>
+            <p class="display-4 font-weight-bold" id="detailStatutVieP"></p>
+            <p class="display-4 font-weight-bold" id="detailSexeP"></p>
+            <p class="display-4 font-weight-bold">.</p>
+          </nav>
+          <!-- <div class="container-fluid"> -->
+          <!-- <div class="main-body">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm">
+               
+                <span id="user-container" class="col"></span>
 
-                
-                <div class="col mb-5">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
-
-                
-                <div class="col mb-5" data-toggle="modal" data-target=".bd-example-modal-lg">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px"
-                        alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                      <h5 class="card-title">TAGNE Elohim</h5>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Eyang, Cameroun</p>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-          
-          <!-- <div class="row fixed-bottom p-3">
-            <div class="col-12 text-center mt-4 mt-sm-5 mx-auto">
-              <ul class="pagination justify-content-center mb-0">
-                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
-                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span
-                    class="sr-only">(current)</span></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">25</a></li>
-                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-              </ul>
+              <div id="pagination-container" class="d-flex justify-content-center mt-4"></div>
+
             </div>
           </div> -->
+
+          <div class="container-fluid">
+            <div class="main-body">
+              <div class="row">
+                <span id="user-container"
+                  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm"></span>
+              </div>
+              <div id="pagination-container" class="d-flex justify-content-center mt-4 fixed-bottom p-3"></div>
+            </div>
+          </div>
         </div>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+          aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-              <div class="modal-header text-white fw-bold">
-                <h5 class="modal-title">Modal title</h5>
+              <div class="modal-header text-white fw-bold bg-primary">
+                <h5 class="modal-title">INFORMATIONS DE L'ETUDIANT : </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
 
               <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Noms : <span class="float-end fw-bold mr-5" id="nom">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Prenoms : <span class="float-end fw-bold mr-5" id="prenom">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Matricule : <span class="float-end fw-bold mr-5" id="matricule">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Ecole D'origine : <span class="float-end fw-bold mr-5" id="ecoleOrigine">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date de Naissance : <span class="float-end fw-bold mr-5" id="dateNaissance">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Lieu de de Naissance : <span class="float-end fw-bold mr-5" id="lieuNaissance">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Telephone : <span class="float-end fw-bold mr-5" id="telephone">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Email : <span class="float-end fw-bold mr-5" id="email">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Region D'origine : <span class="float-end fw-bold mr-5" id="regionOrigine">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Sexe : <span class="float-end fw-bold mr-5" id="sexe">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Cycle : <span class="float-end fw-bold mr-5" id="cycle">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Niveau d'Etudes : <span class="float-end fw-bold mr-5" id="niveau">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Specialite : <span class="float-end fw-bold mr-5" id="specialite">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Statut Compte : <span class="float-end fw-bold mr-5" id="statut">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Nom du Pere : <span class="float-end fw-bold mr-5" id="nomDuPere">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Telephone de Pere : <span class="float-end fw-bold mr-5" id="telephoneDuPere">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Nom de la Mere : <span class="float-end fw-bold mr-5" id="nomDeLaMere">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Telephone de la Mere : <span class="float-end fw-bold mr-5" id="telephoneDeLaMere">lsl</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade bd-enseignant-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-white fw-bold bg-primary">
+                <h5 class="modal-title">INFORMATIONS DE L'ENSEIGNANT : </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Noms : <span class="float-end fw-bold mr-5" id="nomE">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Prenoms : <span class="float-end fw-bold mr-5" id="prenomE">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Sexe : <span class="float-end fw-bold mr-5" id="sexeE">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Code : <span class="float-end fw-bold mr-5" id="code">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date de Naissance : <span class="float-end fw-bold mr-5" id="dateNaissanceE">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Telephone : <span class="float-end fw-bold mr-5" id="telephoneE">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Email : <span class="float-end fw-bold mr-5" id="emailE">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Statut : <span class="float-end fw-bold mr-5" id="statutE">lsl</span>
+                  </div>
+
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Statut vie : <span class="float-end fw-bold mr-5" id="statutVie">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date création: <span class="float-end fw-bold mr-5" id="dateCreation">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date modification : <span class="float-end fw-bold mr-5" id="dateModification">lsl</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade bd-personnel-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-white fw-bold bg-primary">
+                <h5 class="modal-title">INFORMATIONS DU PERSONNEL : </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Noms : <span class="float-end fw-bold mr-5" id="nomP">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Prenoms : <span class="float-end fw-bold mr-5" id="prenomP">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Sexe : <span class="float-end fw-bold mr-5" id="sexeP">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Code : <span class="float-end fw-bold mr-5" id="codeP">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date de Naissance : <span class="float-end fw-bold mr-5" id="dateNaissanceP">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Telephone : <span class="float-end fw-bold mr-5" id="telephoneP">lsl</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Email : <span class="float-end fw-bold mr-5" id="emailP">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Statut : <span class="float-end fw-bold mr-5" id="statutP">lsl</span>
+                  </div>
+
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Statut vie : <span class="float-end fw-bold mr-5" id="statutVieP">lsl</span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 mb-3">
+                    Date modification : <span class="float-end fw-bold mr-5" id="dateModificationP">lsl</span>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -321,6 +448,32 @@
   </div>
   </div>
   <!-- container-scroller -->
+
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bd-enseignant-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bd-personnel-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
 
   <!-- plugins:js -->
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
@@ -348,61 +501,1184 @@
   <script src="../../vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="../../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="js/dataTables.select.min.js"></script>
+  <!-- Include twbs-pagination library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+
 
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../../js/dashboard.js"></script>
   <script src="../../js/Chart.roundedBarCharts.js"></script>
-
   <script>
+    const itemsPerPage = 8;
+    let currentPage = 1;
+    let etudiants = [];
+    let enseignants = [];
+    let personnel = [];// Assurez-vous que cette variable est définie en dehors de toute fonction pour être accessible globalement.
+
+    // Function to display users based on the current page
+
+    function displayUsers(data) {
+      const userContainer = $('#user-container');
+      userContainer.empty();
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      for (let i = startIndex; i < endIndex && i < data.length; i++) {
+        const user = data[i];
+
+        const card = $(`
+          <div class="col p-3 row mx-auto" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="getEtudiantParMatricule('${user.matricule}')">
+            <div class="card mt-5">
+              <div class="card-body text-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px" alt="${user.name}" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                <h5 class="card-title">Matricule : ${user.matricule}</h5>
+                <div class="overflow-auto">
+                  <table class="table text-left">
+                      <tbody>
+                          <tr>
+                              <th scope="row">Noms :</th>
+                              <td>${user.nom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Prenoms :</th>
+                              <td>${user.prenom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Sexe :</th>
+                              <td>${user.sexe}</td>
+                          </tr>
+                           <tr>
+                              <th scope="row">Cycle :</th>
+                              <td>${user.classe.specialite.filiere.libelle}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Niveau :</th>
+                              <td>${user.classe.niveau.libelle}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Specialité :</th>
+                              <td>${user.classe.specialite.libelle}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Email :</th>
+                              <td>${user.email}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+
+        userContainer.append(card);
+      }
+    }
+    function displayEnseignant(data) {
+      const userContainer = $('#user-container');
+      userContainer.empty();
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      for (let i = startIndex; i < endIndex && i < data.length; i++) {
+        const user = data[i];
+
+        const card = $(`
+          <div class="col p-3 row mx-auto" data-toggle="modal" data-target=".bd-enseignant-modal-lg" onclick="getEnseignantParCode(${user.code})">
+            <div class="card mt-5">
+              <div class="card-body text-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px" alt="${user.nom}" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                <h5 class="card-title">Code : ${user.code}</h5>
+                <div class="overflow-auto">
+                  <table class="table text-left">
+                      <tbody>
+                          <tr>
+                              <th scope="row">Noms :</th>
+                              <td>${user.nom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Prenoms :</th>
+                              <td>${user.prenom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Sexe :</th>
+                              <td>${user.sexe}</td>
+                          </tr>
+                           <tr>
+                              <th scope="row">Numéro :</th>
+                              <td>${user.telephone}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Statut :</th>
+                              <td>${user.statut}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Statut de vie :</th>
+                              <td>${user.statutVie}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+
+        userContainer.append(card);
+      }
+    }
+    function displayPersonnel(data) {
+      const userContainer = $('#user-container');
+      userContainer.empty();
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      for (let i = startIndex; i < endIndex && i < data.length; i++) {
+        const user = data[i];
+
+        const card = $(`
+          <div class="col p-3 row mx-auto" data-toggle="modal" data-target=".bd-personnel-modal-lg" onclick="getPersonnelParCode(${user.code})">
+            <div class="card mt-5">
+              <div class="card-body text-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:100px;margin-top:-65px" alt="${user.nom}" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                <h5 class="card-title">Code : ${user.code}</h5>
+                <div class="overflow-auto">
+                  <table class="table text-left">
+                      <tbody>
+                          <tr>
+                              <th scope="row">Noms :</th>
+                              <td>${user.nom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Prenoms :</th>
+                              <td>${user.prenom}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Sexe :</th>
+                              <td>${user.sexe}</td>
+                          </tr>
+                           <tr>
+                              <th scope="row">Numéro :</th>
+                              <td>${user.telephone}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Statut :</th>
+                              <td>${user.statut}</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">Statut de vie :</th>
+                              <td>${user.statutVie}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+
+        userContainer.append(card);
+      }
+    }
+
+
+    function getEtudiantParMatricule(matriculeRecherche) {
+      for (const etudiant of etudiants) {
+        const matriculeEtudiant = etudiant.matricule || ""; // Assurez-vous que le champ matricule existe
+        if (matriculeEtudiant === matriculeRecherche) {
+          $("#nom").text(etudiant.nom);
+          $("#prenom").text(etudiant.prenom);
+          $("#matricule").text(etudiant.matricule);
+          $("#ecoleOrigine").text(etudiant.ecoleOrigine);
+          $("#dateNaissance").text(etudiant.dateNaissance);
+          $("#lieuNaissance").text(etudiant.lieuNaissance);
+          $("#telephone").text(etudiant.telephone);
+          $("#email").text(etudiant.email);
+          $("#regionOrigine").text(etudiant.regionOrigine);
+          $("#sexe").text(etudiant.sexe);
+          $("#cycle").text(etudiant.classe.specialite.filiere.libelle);
+          $("#niveau").text(etudiant.classe.niveau.libelle);
+          $("#specialite").text(etudiant.classe.specialite.filiere.libelle);
+          $("#statut").text(etudiant.statut);
+          $("#nomDuPere").text(etudiant.nomDuPere);
+          $("#telephoneDuPere").text(etudiant.telephoneDuPere);
+          $("#nomDeLaMere").text(etudiant.nomDeLaMere);
+          $("#telephoneDeLaMere").text(etudiant.telephoneDeLaMere);
+        }
+      }
+      return null; // Aucun étudiant trouvé avec le matricule donné
+    }
+    function getEnseignantParCode(codeRecherche) {
+      for (const enseignant of enseignants) {
+        const codeEnseignant = enseignant.code;
+        if (codeEnseignant == codeRecherche) {
+          $("#nomE").text(enseignant.nom);
+          $("#prenomE").text(enseignant.prenom);
+          $("#code").text(enseignant.code);
+          $("#dateNaissanceE").text(enseignant.dateNaissance);
+          $("#telephoneE").text(enseignant.telephone);
+          $("#statutE").text(enseignant.statut);
+          $("#dateCreation").text(enseignant.dateCreation);
+          $("#emailE").text(enseignant.email);
+          $("#statutVie").text(enseignant.statutVie);
+          $("#sexeE").text(enseignant.sexe);
+          $("#dateModification").text(enseignant.dateModification);
+        }
+      }
+      return null; // Aucun Enseignant trouvé avec le code donné
+    }
+
+    function getPersonnelParCode(codeRecherche) {
+      for (const pers of personnel) {
+        const codePersonnel = pers.code;
+        if (codePersonnel == codeRecherche) {
+          $("#nomP").text(pers.nom);
+          $("#prenomP").text(pers.prenom);
+          $("#codeP").text(pers.code);
+          $("#dateNaissanceP").text(pers.dateNaissance);
+          $("#telephoneP").text(pers.telephone);
+          $("#statutP").text(pers.statut);
+          $("#emailP").text(pers.email);
+          $("#statutVieP").text(pers.statutVie);
+          $("#sexeP").text(pers.sexe);
+          $("#dateModificationP").text(pers.dateModification);
+        }
+      }
+      return null; // Aucun Enseignant trouvé avec le code donné
+    }
+
+
+
+    $(document).ready(function () {
+
+      $('#nom-section, #prenom-section').hide();
+
+      $.ajax({
+        url: 'http://localhost:9000/api/gest-note/api/utilisateur/all',
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        success: function (response) {
+          // Traitement de la réponse réussie
+          // console.log("enseignants : ", response);
+          personnel = response;
+        },
+        error: function (xhr, status, error) {
+          // Traitement des erreurs
+          console.error('Une erreur est survenue lors de la requête:', status, error);
+        }
+      });
+
+      $.ajax({
+        url: 'http://localhost:9000/api/gest-note/api/enseignant/all',
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        success: function (response) {
+          // Traitement de la réponse réussie
+          // console.log("enseignants : ", response);
+          enseignants = response;
+
+        },
+        error: function (xhr, status, error) {
+          // Traitement des erreurs
+          console.error('Une erreur est survenue lors de la requête:', status, error);
+        }
+      });
+
+      $.ajax({
+        url: 'http://localhost:9000/api/gest-note/api/etudiant/all',
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        success: function (response) {
+          // Traitement de la réponse réussie
+          etudiants = response;
+          populateNiveauEtude(etudiants);
+          populateSpecialiteEtude(etudiants);
+          populateCycleEtude(etudiants);
+
+
+
+          console.log("niveaux : ", etudiants);
+        },
+        error: function (xhr, status, error) {
+          // Traitement des erreurs
+          console.error('Une erreur est survenue lors de la requête:', status, error);
+        }
+      });
+    });
+
+    //Updates pour personnel
+    function updateStatutP() {
+      const selectedStatutP = document.getElementById('section-statutP-class').value;
+      const selectedStatutVieP = document.getElementById('section-statutVieP-class').value;
+      const selectedSexeP = document.getElementById('section-sexeP-class').value;
+
+      console.log(selectedStatutP, selectedStatutVieP, selectedSexeP);
+
+      // Filter teachers based on selected filters
+      const filteredPersonnel = personnel.filter(personnels => {
+        const statutMatch = selectedStatutP === '*' || personnels.statut === selectedStatutP;
+        const statutVieMatch = selectedStatutVieP === '*' || personnels.statutVie === selectedStatutVieP;
+        const sexeMatch = selectedSexeP === '*' || personnels.sexe === selectedSexeP;
+
+        if(selectedStatutP){
+          $("#detailStatutP").text(", au statut "+selectedStatutP);
+        }
+        if (selectedStatutP === '*'){
+          $("#detailStatutP").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayPersonnel(filteredPersonnel);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredPersonnel.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayPersonnel(filteredPersonnel);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function updateStatutVieP() {
+      const selectedStatutP = document.getElementById('section-statutP-class').value;
+      const selectedStatutVieP = document.getElementById('section-statutVieP-class').value;
+      const selectedSexeP = document.getElementById('section-sexeP-class').value;
+
+      console.log(selectedStatutP, selectedStatutVieP, selectedSexeP);
+
+      // Filter teachers based on selected filters
+      const filteredPersonnel = personnel.filter(personnels => {
+        const statutMatch = selectedStatutP === '*' || personnels.statut === selectedStatutP;
+        const statutVieMatch = selectedStatutVieP === '*' || personnels.statutVie === selectedStatutVieP;
+        const sexeMatch = selectedSexeP === '*' || personnels.sexe === selectedSexeP;
+
+        if(selectedStatutVieP){
+          $("#detailStatutVieP").text(", au statut de vie "+selectedStatutVieP);
+        }
+        if (selectedStatutVieP === '*'){
+          $("#detailStatutVieP").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayPersonnel(filteredPersonnel);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredPersonnel.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayPersonnel(filteredPersonnel);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function updateSexeP() {
+      const selectedStatutP = document.getElementById('section-statutP-class').value;
+      const selectedStatutVieP = document.getElementById('section-statutVieP-class').value;
+      const selectedSexeP = document.getElementById('section-sexeP-class').value;
+
+      console.log(selectedStatutP, selectedStatutVieP, selectedSexeP);
+
+      // Filter teachers based on selected filters
+      const filteredPersonnel = personnel.filter(personnels => {
+        const statutMatch = selectedStatutP === '*' || personnels.statut === selectedStatutP;
+        const statutVieMatch = selectedStatutVieP === '*' || personnels.statutVie === selectedStatutVieP;
+        const sexeMatch = selectedSexeP === '*' || personnels.sexe === selectedSexeP;
+
+        if(selectedSexeP){
+          $("#detailSexeP").text(", de sexe "+selectedSexeP);
+        }
+        if (selectedSexeP === '*'){
+          $("#detailSexeP").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayPersonnel(filteredPersonnel);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredPersonnel.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayPersonnel(filteredPersonnel);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    //Updates pour l'enseignant
+    function updateStatutE() {
+      const selectedStatutE = document.getElementById('section-statutE-class').value;
+      const selectedStatutVieE = document.getElementById('section-statutVieE-class').value;
+      const selectedSexe = document.getElementById('section-sexeE-class').value;
+
+      console.log(selectedStatutE, selectedStatutVieE, selectedSexe);
+
+      // Filter teachers based on selected filters
+      const filteredTeachers = enseignants.filter(enseignant => {
+        const statutMatch = selectedStatutE === '*' || enseignant.statut === selectedStatutE;
+        const statutVieMatch = selectedStatutVieE === '*' || enseignant.statutVie === selectedStatutVieE;
+        const sexeMatch = selectedSexe === '*' || enseignant.sexe === selectedSexe;
+
+        if(selectedStatutE){
+          $("#detailStatutE").text(", au statut "+selectedStatutE);
+        }
+        if (selectedStatutE === '*'){
+          $("#detailStatutE").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayEnseignant(filteredTeachers);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredTeachers.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayEnseignant(filteredTeachers);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function updateStatutVieE() {
+      const selectedStatutE = document.getElementById('section-statutE-class').value;
+      const selectedStatutVieE = document.getElementById('section-statutVieE-class').value;
+      const selectedSexe = document.getElementById('section-sexeE-class').value;
+
+      console.log(selectedStatutE, selectedStatutVieE, selectedSexe);
+
+      // Filter teachers based on selected filters
+      const filteredTeachers = enseignants.filter(enseignant => {
+        const statutMatch = selectedStatutE === '*' || enseignant.statut === selectedStatutE;
+        const statutVieMatch = selectedStatutVieE === '*' || enseignant.statutVie === selectedStatutVieE;
+        const sexeMatch = selectedSexe === '*' || enseignant.sexe === selectedSexe;
+
+        if(selectedStatutVieE){
+          $("#detailStatutVieE").text(", au statut de vie "+selectedStatutVieE);
+        }
+        if (selectedStatutVieE === '*'){
+          $("#detailStatutVieE").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayEnseignant(filteredTeachers);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredTeachers.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayEnseignant(filteredTeachers);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function updateSexeE() {
+      const selectedStatutE = document.getElementById('section-statutE-class').value;
+      const selectedStatutVieE = document.getElementById('section-statutVieE-class').value;
+      const selectedSexe = document.getElementById('section-sexeE-class').value;
+
+      console.log(selectedStatutE, selectedStatutVieE, selectedSexe);
+
+      // Filter teachers based on selected filters
+      const filteredTeachers = enseignants.filter(enseignant => {
+        const statutMatch = selectedStatutE === '*' || enseignant.statut === selectedStatutE;
+        const statutVieMatch = selectedStatutVieE === '*' || enseignant.statutVie === selectedStatutVieE;
+        const sexeMatch = selectedSexe === '*' || enseignant.sexe === selectedSexe;
+
+        if(selectedSexe){
+          $("#detailSexeE").text(", de sexe "+selectedSexe);
+        }
+        if (selectedSexe === '*'){
+          $("#detailSexeE").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayEnseignant(filteredTeachers);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredTeachers.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayEnseignant(filteredTeachers);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    //Updates pour l'étudiant
+    function updateCycle() {
+      const selectedNiveau = document.getElementById('niveau-etude-class').value;
+      const selectedSpecialite = document.getElementById('specialite-class').value;
+      const selectedCycle = document.getElementById('cycle-class').value;
+      const selectedSexe = document.getElementById('section-sexe-class').value;
+
+      console.log(selectedNiveau, selectedSpecialite, selectedCycle, selectedSexe);
+
+      // Filter students based on selected filters
+      const filteredStudents = etudiants.filter(student => {
+        const niveauMatch = selectedNiveau === '*' || student.classe.niveau.libelle === selectedNiveau;
+        const specialiteMatch = selectedSpecialite === '*' || student.classe.specialite.libelle === selectedSpecialite;
+        const cycleMatch = selectedCycle === '*' || student.classe.specialite.filiere.libelle === selectedCycle;
+        const sexeMatch = selectedSexe === '*' || student.sexe === selectedSexe;
+
+        if(selectedCycle){
+          $("#detailCycle").text(", au cycle "+selectedCycle);
+        }
+        if (selectedCycle === '*'){
+          $("#detailCycle").text("");
+        }
+
+        return niveauMatch && specialiteMatch && cycleMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayUsers(filteredStudents);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredStudents.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayUsers(filteredStudents);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+
+
+
+    function updateNiveauEtude() {
+      const selectedNiveau = document.getElementById('niveau-etude-class').value;
+      const selectedSpecialite = document.getElementById('specialite-class').value;
+      const selectedCycle = document.getElementById('cycle-class').value;
+      const selectedSexe = document.getElementById('section-sexe-class').value;
+
+      console.log(selectedNiveau, selectedSpecialite, selectedCycle, selectedSexe);
+
+      // Filter students based on selected filters
+      const filteredStudents = etudiants.filter(student => {
+        const niveauMatch = selectedNiveau === '*' || student.classe.niveau.libelle === selectedNiveau;
+        const specialiteMatch = selectedSpecialite === '*' || student.classe.specialite.libelle === selectedSpecialite;
+        const cycleMatch = selectedCycle === '*' || student.classe.specialite.filiere.libelle === selectedCycle;
+        const sexeMatch = selectedSexe === '*' || student.sexe === selectedSexe;
+        if(selectedNiveau){
+          $("#detailNiveau").text(", au "+selectedNiveau);
+        }
+        if (selectedNiveau === '*'){
+          $("#detailNiveau").text("");
+        }
+
+        return niveauMatch && specialiteMatch && cycleMatch && sexeMatch;
+      });
+
+      // Display the filtered students
+      displayUsers(filteredStudents);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredStudents.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayUsers(filteredStudents);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+
+
+
+
+    function updateSpecialite() {
+      const selectedNiveau = document.getElementById('niveau-etude-class').value;
+      const selectedSpecialite = document.getElementById('specialite-class').value;
+      const selectedCycle = document.getElementById('cycle-class').value;
+      const selectedSexe = document.getElementById('section-sexe-class').value;
+
+      console.log(selectedNiveau, selectedSpecialite, selectedCycle, selectedSexe);
+
+      // Filter students based on selected filters
+      const filteredStudents = etudiants.filter(student => {
+        const niveauMatch = selectedNiveau === '*' || student.classe.niveau.libelle === selectedNiveau;
+        const specialiteMatch = selectedSpecialite === '*' || student.classe.specialite.libelle === selectedSpecialite;
+        const cycleMatch = selectedCycle === '*' || student.classe.specialite.filiere.libelle === selectedCycle;
+        const sexeMatch = selectedSexe === '*' || student.sexe === selectedSexe;
+
+        if(selectedSpecialite){
+          $("#detailSpecialite").text(", de spécialité "+selectedSpecialite);
+        }
+        if (selectedSpecialite === '*'){
+          $("#detailSpecialite").text("");
+        }
+
+        return niveauMatch && specialiteMatch && cycleMatch && sexeMatch;
+      });
+
+      // Display the filtered students
+      displayUsers(filteredStudents);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredStudents.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayUsers(filteredStudents);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+
+    
+    function updateSexe() {
+      const selectedNiveau = document.getElementById('niveau-etude-class').value;
+      const selectedSpecialite = document.getElementById('specialite-class').value;
+      const selectedCycle = document.getElementById('cycle-class').value;
+      const selectedSexe = document.getElementById('section-sexe-class').value;
+
+      console.log(selectedNiveau, selectedSpecialite, selectedCycle, selectedSexe);
+
+      // Filter students based on selected filters
+      const filteredStudents = etudiants.filter(student => {
+        const niveauMatch = selectedNiveau === '*' || student.classe.niveau.libelle === selectedNiveau;
+        const specialiteMatch = selectedSpecialite === '*' || student.classe.specialite.libelle === selectedSpecialite;
+        const cycleMatch = selectedCycle === '*' || student.classe.specialite.filiere.libelle === selectedCycle;
+        const sexeMatch = selectedSexe === '*' || student.sexe === selectedSexe;
+
+        if(selectedSexe){
+          $("#detailSexe").text(", de sexe "+selectedSexe);
+        }
+        if (selectedSexe === '*'){
+          $("#detailSexe").text("");
+        }
+
+        return niveauMatch && specialiteMatch && cycleMatch && sexeMatch;
+      });
+
+      // Display the filtered students
+      displayUsers(filteredStudents);
+
+        var newPaginationContainer = $('<div>');
+        // Initialiser twbsPagination sur le nouvel élément
+        newPaginationContainer.twbsPagination({
+            totalPages: Math.ceil(filteredStudents.length / itemsPerPage),
+            visiblePages: 5,
+            onPageClick: function (event, page) {
+                currentPage = page;
+                displayUsers(filteredStudents);
+            }
+        });
+
+        // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+        $('#pagination-container').html(newPaginationContainer);
+    }
+
+
+
+
+
+
+    function populateNiveauEtude(etudiants) {
+      const uniqueNiveaux = Array.from(new Set(etudiants.map(item => item.classe.niveau.libelle))).sort();
+      const selectElement = document.getElementById('niveau-etude-class');
+
+      // Populate the select element with unique values
+      uniqueNiveaux.forEach(niveau => {
+        const option = document.createElement('option');
+        option.value = niveau;
+        option.textContent = niveau;
+        selectElement.appendChild(option);
+      });
+    }
+
+    function populateSpecialiteEtude(etudiants) {
+      const unique = Array.from(new Set(etudiants.map(item => item.classe.specialite.libelle))).sort();
+      const selectElement = document.getElementById('specialite-class');
+
+      // Populate the select element with unique values
+      unique.forEach(niveau => {
+        const option = document.createElement('option');
+        option.value = niveau;
+        option.textContent = niveau;
+        selectElement.appendChild(option);
+      });
+    }
+
+    function populateCycleEtude(etudiants) {
+      const unique = Array.from(new Set(etudiants.map(item => item.classe.specialite.filiere.libelle))).sort();
+      const selectElement = document.getElementById('cycle-class');
+
+      // Populate the select element with unique values
+      unique.forEach(niveau => {
+        const option = document.createElement('option');
+        option.value = niveau;
+        option.textContent = niveau;
+        selectElement.appendChild(option);
+      });
+    }
+
+    function filterData(filterText, property) {
+      var filterTextLower = filterText.toLowerCase();
+
+      // Filtrer les données en fonction du texte de filtre et de la propriété spécifiée
+      var filteredData = etudiants.filter(function (item) {
+        return item[property].toLowerCase().includes(filterTextLower);
+      });
+
+
+      console.log("Nom : ", filteredData);
+
+      // Récupérer les valeurs des filtres sélectionnés
+      var selectedNiveau = $('#niveau-etude-class').val();
+      var selectedSpecialite = $('#specialite-class').val();
+      var selectedCycle = $('#cycle-class').val();
+      var selectedSexe = $('#section-sexe-class').val();
+
+      console.log(selectedNiveau, selectedSpecialite, selectedCycle, selectedSexe);
+
+      // Filtrer les étudiants en fonction des filtres sélectionnés
+      var filteredStudents = filteredData.filter(function (student) {
+        var niveauMatch = selectedNiveau === '*' || student.classe.niveau.libelle === selectedNiveau;
+        var specialiteMatch = selectedSpecialite === '*' || student.classe.specialite.libelle === selectedSpecialite;
+        var cycleMatch = selectedCycle === '*' || student.classe.specialite.filiere.libelle === selectedCycle;
+        var sexeMatch = selectedSexe === '*' || student.sexe === selectedSexe;
+
+        return niveauMatch && specialiteMatch && cycleMatch && sexeMatch;
+      });
+
+      // Afficher les étudiants filtrés
+      displayUsers(filteredStudents);
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredStudents.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayUsers(filteredStudents);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function filterDataEns(filterText, property) {
+      var filterTextLower = filterText.toLowerCase();
+
+      // Filtrer les données en fonction du texte de filtre et de la propriété spécifiée
+      var filteredData = enseignants.filter(function (item) {
+        return item[property].toLowerCase().includes(filterTextLower);
+      });
+
+
+      console.log("Nom : ", filteredData);
+
+      const selectedStatutE = document.getElementById('section-statutE-class').value;
+      const selectedStatutVieE = document.getElementById('section-statutVieE-class').value;
+      const selectedSexe = document.getElementById('section-sexeE-class').value;
+
+      console.log(selectedStatutE, selectedStatutVieE, selectedSexe);
+
+      // Filter teachers based on selected filters
+      const filteredTeachers = filteredData.filter(enseignant => {
+        const statutMatch = selectedStatutE === '*' || enseignant.statut === selectedStatutE;
+        const statutVieMatch = selectedStatutVieE === '*' || enseignant.statutVie === selectedStatutVieE;
+        const sexeMatch = selectedSexe === '*' || enseignant.sexe === selectedSexe;
+
+        if(selectedSexe){
+          $("#detailSexeE").text(", de sexe "+selectedSexe);
+        }
+        if (selectedSexe === '*'){
+          $("#detailSexeE").text("");
+        }
+
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayEnseignant(filteredTeachers);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredTeachers.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayEnseignant(filteredTeachers);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function filterDataPers(filterText, property) {
+      var filterTextLower = filterText.toLowerCase();
+
+      // Filtrer les données en fonction du texte de filtre et de la propriété spécifiée
+      var filteredData = personnel.filter(function (item) {
+        return item[property].toLowerCase().includes(filterTextLower);
+      });
+
+
+      console.log("Nom : ", filteredData);
+
+      const selectedStatutP = document.getElementById('section-statutP-class').value;
+      const selectedStatutVieP = document.getElementById('section-statutVieP-class').value;
+      const selectedSexeP = document.getElementById('section-sexeP-class').value;
+
+      console.log(selectedStatutP, selectedStatutVieP, selectedSexeP);
+
+      // Filter teachers based on selected filters
+      const filteredPersonnel = filteredData.filter(personnels => {
+        const statutMatch = selectedStatutP === '*' || personnels.statut === selectedStatutP;
+        const statutVieMatch = selectedStatutVieP === '*' || personnels.statutVie === selectedStatutVieP;
+        const sexeMatch = selectedSexeP === '*' || personnels.sexe === selectedSexeP;
+        return statutMatch && statutVieMatch && sexeMatch;
+      });
+
+
+      // Display the filtered students
+      displayPersonnel(filteredPersonnel);
+
+      // Initialize twbs-pagination
+
+
+      var newPaginationContainer = $('<div>');
+      // Initialiser twbsPagination sur le nouvel élément
+      newPaginationContainer.twbsPagination({
+        totalPages: Math.ceil(filteredPersonnel.length / itemsPerPage),
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+          currentPage = page;
+          displayPersonnel(filteredPersonnel);
+        }
+      });
+
+      // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+      $('#pagination-container').html(newPaginationContainer);
+    }
+
+    function viderFiltre() {
+      $('#nom-class').val("");
+      $('#prenom-class').val("");
+      $('#section-statutE-class').val("*");
+      $('#section-statutVieE-class').val("*");
+      $('#section-sexeE-class').val("*");
+      $('#section-statutP-class').val("*");
+      $('#section-statutVieP-class').val("*");
+      $('#section-sexeP-class').val("*");
+      $('#niveau-etude-class').val("*");
+      $('#specialite-class').val("*");
+      $('#cycle-class').val("*");
+      $('#section-sexe-class').val("*");
+      $('#detailCycle').text("");
+      $('#detailNiveau').text("");
+      $('#detailSpecialite').text("");
+      $('#detailSexe').text("");
+      $('#detailStatutE').text("");
+      $('#detailStatutVieE').text("");
+      $('#detailSexeE').text("");
+      $('#detailStatutP').text("");
+      $('#detailStatutVieP').text("");
+      $('#detailSexeP').text("");
+    }
+
     function updatePopulation() {
       var population = $('#population-class').val();
       var nom_label = $('#nom-utilisateur');
       var prenom_label = $('#prenom-utilisateur');
       var titre_search = $('#title_label');
+      var infos = $('#infos');
 
       if (population === 'Etudiant') {
+        viderFiltre();
+        $('#nom-section').show();
+        $('#prenom-section').show();
+
         nom_label.text("Nom Etudiant");
         prenom_label.text("Prénom Etudiant");
         titre_search.text("Filtrez les informations des Etudiants");
+        infos.text("Voici tous les étudiants que l'IUSJ ait connu");
 
         $('#etudiant-filter').removeClass("d-none");
         $('#personnel-filter').addClass("d-none");
+        $('#enseignants-filter').addClass("d-none");
 
-      } else if (population == 'Personnel') {
+        displayUsers(etudiants);
+
+        // Initialize twbs-pagination
+        // Créer un nouvel élément div pour la pagination
+        var newPaginationContainer = $('<div>');
+
+        // Initialiser twbsPagination sur le nouvel élément
+        newPaginationContainer.twbsPagination({
+          totalPages: Math.ceil(etudiants.length / itemsPerPage),
+          visiblePages: 5,
+          onPageClick: function (event, page) {
+            currentPage = page;
+            displayUsers(etudiants);
+          }
+        });
+
+        // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+        $('#pagination-container').html(newPaginationContainer);
+
+        $('#nom-class').on('input', function () {
+          filterData($(this).val(), 'nom');
+          if($(this).val()){
+            infos.text("Voici l'étudiant de nom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici tous les étudiants que l'IUSJ ait connu");
+          }
+
+        });
+        $('#prenom-class').on('input', function () {
+          filterData($(this).val(), 'prenom');
+          if($(this).val()){
+            infos.text("Voici l'étudiant de prénom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici tous les étudiants que l'IUSJ ait connu");
+          }
+        });
+
+
+      }
+      else if (population === 'Personnel') {
+        viderFiltre();
+        $('#nom-section').show();
+        $('#prenom-section').show();
+
         nom_label.text("Nom Personnel");
         prenom_label.text("Prénom Personnel");
         titre_search.text("Filtrez les informations du Personnel");
-        
+        infos.text("Voici les personnels de l'IUSJ");
+
+        displayPersonnel(personnel);
 
         $('#etudiant-filter').addClass("d-none");
         $('#personnel-filter').removeClass("d-none");
+        $('#enseignants-filter').addClass("d-none");
+        var newPaginationContainer = $('<div>');
+
+        // Initialiser twbsPagination sur le nouvel élément
+        newPaginationContainer.twbsPagination({
+          totalPages: Math.ceil(personnel.length / itemsPerPage),
+          visiblePages: 5,
+          onPageClick: function (event, page) {
+            currentPage = page;
+            displayPersonnel(personnel);
+          }
+        });
+
+        // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+        $('#pagination-container').html(newPaginationContainer);
+
+        $('#nom-class').on('input', function () {
+          filterDataPers($(this).val(), 'nom');
+          if($(this).val()){
+            infos.text("Voici le personnel de nom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici les personnels de l'IUSJ");
+          }
+
+        });
+        $('#prenom-class').on('input', function () {
+          filterDataPers($(this).val(), 'prenom');
+          if($(this).val()){
+            infos.text("Voici le personnel de prénom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici les personnels de l'IUSJ");
+          }
+
+        });
+
       }
-      else if (population == 'Enseignant') {
+      else if (population === 'Enseignant') {
+        viderFiltre();
+        $('#nom-section').show();
+        $('#prenom-section').show();
+
         nom_label.text("Nom Enseignant");
         prenom_label.text("Prénom Enseignant");
         titre_search.text("Filtrez les informations des Enseignants");
-        
+        infos.text("Voici les enseignants de l'IUSJ");
+
+        displayEnseignant(enseignants);
         $('#etudiant-filter').addClass("d-none");
         $('#personnel-filter').addClass("d-none");
+        $('#enseignants-filter').removeClass("d-none");
+        var newPaginationContainer = $('<div>');
+
+
+        // Initialiser twbsPagination sur le nouvel élément
+        newPaginationContainer.twbsPagination({
+          totalPages: Math.ceil(enseignants.length / itemsPerPage),
+          visiblePages: 5,
+          onPageClick: function (event, page) {
+            currentPage = page;
+            displayEnseignant(enseignants);
+          }
+        });
+
+        // Remplacer l'ancien contenu de #pagination-container par le nouvel élément
+        $('#pagination-container').html(newPaginationContainer);
+
+        $('#nom-class').on('input', function () {
+          filterDataEns($(this).val(), 'nom');
+          if($(this).val()){
+            infos.text("Voici l'enseignant de nom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici les enseignants de l'IUSJ");
+          }
+
+        });
+        $('#prenom-class').on('input', function () {
+          filterDataEns($(this).val(), 'prenom');
+          if($(this).val()){
+            infos.text("Voici l'enseignant de prénom : "+$(this).val()+", en fonction des filtres sélectionnés");
+          }
+          else{
+            infos.text("Voici les enseignants de l'IUSJ");
+          }
+
+        });
+
+
       }
-      else  {
-        nom_label.text("Nom Utilisateur");
-        prenom_label.text("Prénom Utilisateur");
-        titre_search.text("Filtrez les informations des Utilisateurs");
-        
+      else {
+        viderFiltre();
+        $('#nom-section').hide();
+        $('#prenom-section').hide();
+        infos.text("Cliquer sur le rectangle en haut ayant \"Population\" comme titre. Pour parcourir le trombinoscope");
+
         $('#etudiant-filter').addClass("d-none");
         $('#personnel-filter').addClass("d-none");
+        $('#enseignants-filter').addClass("d-none");
+        $('#user-container').text('');
+        $('#pagination-container').html('');
       }
     }
-
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
   </script>
-
-
 </body>
 
 </html>

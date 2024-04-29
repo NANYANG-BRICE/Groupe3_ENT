@@ -32,6 +32,9 @@ public class Intervention implements Serializable {
     @Column(name = "dateCreationIntervention")
     private Date dateCreationInter;
 
+    @Column(name = "dateModificationIntervention")
+    private Date dateModificationInter;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
     private Statut statut;

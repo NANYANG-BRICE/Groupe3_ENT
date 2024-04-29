@@ -74,6 +74,21 @@ public class InterventionServiceImplementation implements InterventionService {
 
     @Value("${user.home}")
     private String homeDirectory;
+
+
+
+    @Override
+    public Intervention singleIntervention(Long interventionId) {
+        Optional<Intervention> optionalIntervention = interventionRepository.findById(interventionId);
+        if (optionalIntervention.isPresent()) {
+            Intervention intervention = optionalIntervention.get();
+            return  intervention;
+        } else {
+            throw new RuntimeException("Intervention non trouvée.");
+        }
+    }
+
+
     @Override
     public Intervention creerIntervention(long codeEtudiant, Long idCategorie,
                                           List<MultipartFile> fichiers,
@@ -109,65 +124,6 @@ public class InterventionServiceImplementation implements InterventionService {
         intervention.setDescription(DescriptionIntervention);
         intervention.setStatut(Statut.nonTraite);
         intervention.setDateCreationInter(new Date());
-
-
-
-//        Set<PieceJointe> piecesJointes = new HashSet<>();
-//        if (pieceJointeList != null && !pieceJointeList.isEmpty()) {
-//            for (MultipartFile pieceJointe : pieceJointeList) {
-//                PieceJointe pieceJointeEntity = new PieceJointe();
-//                pieceJointeEntity.setNomFichier(pieceJointe.getOriginalFilename());
-//
-//                // Enregistrement de la pièce jointe
-//                String dossierPieceJointe = homeDirectory + File.separator + "Desktop" + File.separator + "Piece-jointe-intervention";
-//                File dossier = new File(dossierPieceJointe);
-//                if (!dossier.exists()) {
-//                    if (dossier.mkdirs()) {
-//                        System.out.println("Dossier Piece-jointe-intervention créé avec succès.");
-//                    } else {
-//                        System.out.println("Échec de la création du dossier Piece-jointe-intervention.");
-//                    }
-//                }
-//                try {
-//                    String nomFichier = pieceJointe.getOriginalFilename();
-//                    String cheminFichier = dossierPieceJointe + File.separator + nomFichier;
-//                    File fichier = new File(cheminFichier);
-//                    pieceJointe.transferTo(fichier);
-//
-//                    // Configuration du chemin de stockage de la pièce jointe
-//                    pieceJointeEntity.setCheminStockage(dossierPieceJointe + File.separator + nomFichier);
-//                    piecesJointes.add(pieceJointeEntity);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
-//        if (pieceJointe != null && !pieceJointe.isEmpty()) {
-//            try {
-//                // Spécifiez le chemin où vous souhaitez enregistrer le fichier
-//                String filePath = "C:\\Users\\pc\\Desktop\\gestIntervention\\" + pieceJointe.getOriginalFilename();
-//                pieceJointe.transferTo(new File(filePath));
-//                intervention.setFile(filePath);
-////                System.out.println(filePath);
-////                System.out.println(nomDepartement);
-//                // Vous pouvez également effectuer des opérations supplémentaires ici
-//
-////                return ResponseEntity.ok("File uploaded successfully");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-////                return ResponseEntity.status(500).body("Failed to upload file");
-//            }
-//        } else {
-////            return ResponseEntity.badRequest().body("Please select a file to upload");
-//        }
-
-
-
-
-
-
-
         intervention.setSousIntervention(sousIntervention);
         intervention.setCategorie(categorie);
         EmailMessage emailMessage  = new EmailMessage();
@@ -199,7 +155,7 @@ public class InterventionServiceImplementation implements InterventionService {
                     emailManeger.addToEmailMessagePermanent(emaile);
                     if(emailManeger.isConnectedToNetwork()){
                         emailService.EnvoieEmail(emailMessage);
-                        System.out.println("belom jordan mail");
+                        System.out.println("Nanyang Brice : nanyangbrice@gmail.com");
 
                     }else {
                         emailManeger.addToEmailMessage(emailMessage);
@@ -245,6 +201,7 @@ public class InterventionServiceImplementation implements InterventionService {
                 .orElseThrow(() -> new EntityNotFoundException("Personnel introuvable."));
 
         intervention.setStatut(Statut.enCours);
+        intervention.setDateModificationInter(new Date());
         intervention.setPersonnel(personnel);
         intervention.setTaken(true);
         EmailMessage emailMessage  = new EmailMessage();
@@ -292,6 +249,7 @@ public class InterventionServiceImplementation implements InterventionService {
         Intervention intervention = interventionRepository.findById(interventionId)
                 .orElseThrow(() -> new EntityNotFoundException("Intervention introuvable."));
         intervention.setStatut(Statut.traite);
+        intervention.setDateModificationInter(new Date());
         EmailMessage emailMessage  = new EmailMessage();
         System.out.println("belom dans l'envoie d'email" + emailContent);
         emailMessage.setContent(emailContent);
@@ -361,24 +319,9 @@ public class InterventionServiceImplementation implements InterventionService {
         return interventionRepository.save(intervention);
     }
 
-//    @Override
-//    public Resource downloadPieceJointe(Long interventionId) throws IOException {
-//        Intervention intervention = interventionRepository.findById(interventionId).orElse(null);
-//        if (intervention == null || intervention.getFile() == null) {
-//            throw new FileNotFoundException("Fichier introuvable pour cette intervention.");
-//        }
-//
-//        String filePath = intervention.getFile();
-//        File file = new File(filePath);
-//        byte[] fileBytes = Files.readAllBytes(file.toPath());
-//        return new ByteArrayResource(fileBytes);
-//    }
 
     public PieceJointe getPieceJointeById(Long idPieceJointe) {
-        // Appelez votre repository pour récupérer la pièce jointe par son ID
-        // Utilisez votre repository pour rechercher la pièce jointe par son ID
         Optional<PieceJointe> optionalPieceJointe = pieceJointeRepository.findById(idPieceJointe);
-        // Vérifiez si la pièce jointe existe, sinon lancez une exception ou gérez l'absence de pièce jointe comme approprié
         return optionalPieceJointe.orElseThrow(() -> new PieceJointeNotFoundException("Piece jointe introuvable avec l'ID : " + idPieceJointe));
     }
 
@@ -388,6 +331,8 @@ public class InterventionServiceImplementation implements InterventionService {
             Intervention intervention = optionalIntervention.get();
             if (!intervention.isTaken()) {
                 intervention.setCanceled(true);
+                intervention.setStatut(Statut.rejetter);
+                intervention.setDateModificationInter(new Date());
                 interventionRepository.save(intervention);
             } else {
                 throw new RuntimeException("L'intervention a déjà été prise en charge et ne peut pas être annulée.");

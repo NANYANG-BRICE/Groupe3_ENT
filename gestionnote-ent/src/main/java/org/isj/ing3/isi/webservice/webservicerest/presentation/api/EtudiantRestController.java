@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/etudiant")
 @Slf4j
+@CrossOrigin("*")
 
 public class EtudiantRestController {
     @Autowired

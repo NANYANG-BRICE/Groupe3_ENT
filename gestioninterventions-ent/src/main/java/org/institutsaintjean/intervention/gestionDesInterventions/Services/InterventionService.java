@@ -13,6 +13,9 @@ import java.util.List;
 
 
 public interface InterventionService {
+
+    public Intervention singleIntervention(Long interventionId);
+
     public Intervention creerIntervention(long codeEtudiant, Long idCategorie,
                                           List<MultipartFile> fichiers,
                                           String file,

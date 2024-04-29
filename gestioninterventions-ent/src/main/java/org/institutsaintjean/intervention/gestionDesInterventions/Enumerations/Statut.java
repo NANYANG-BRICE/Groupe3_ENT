@@ -7,6 +7,7 @@ import lombok.Data;
 public enum Statut {
 
     nonTraite,
+    rejetter,
     enCours,
     traite
 }

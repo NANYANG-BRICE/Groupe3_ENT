@@ -2,65 +2,47 @@
 <html lang="en" html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Gestion des Interventions</title>
-  <!-- plugins:css -->
   <link rel="stylesheet" href="/vendors/feather/feather.css">
   <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
   <link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/vendors/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" type="/text/css" href="js/select.dataTables.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
   <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
-  <!-- endinject -->
   <link rel="shortcut icon" href="/images/favicon.png" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/gIntervention.css}" >
-<!--  <script type="text/javascript" th:src="@{/js/jquery-3.6.4.min.js}"></script>-->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/gIntervention.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/sweetalert2/sweetalert2.css}">
   <script th:inline="javascript">
-    /* Déclarer la variable JavaScript avec Thymeleaf */
     var myVar = 'Valeur par défaut';
   </script>
-<!--  <script  th:inline="javascript">-->
-<!--    alert("hello world")-->
-<!--    function greetWorld() {-->
-<!--      alert("hello world")-->
-<!--    }-->
-
-<!--    function salute(name) {-->
-<!--      alert("hello: " + name)-->
-<!--    }-->
-<!--  </script>-->
 </head>
 
 <body>
-<head>
-  <!-- Required meta tags -->
-  <th:block th:replace="fragments/_head.html::head"></th:block>
-  <th:block th:replace="fragments/_modalsIntervention.html::modalsIntervention"></th:block>
 
-</head>
+  <head>
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+    <th:block th:replace="fragments/_modalsIntervention.html::modalsIntervention"></th:block>
+  </head>
+
   <div class="container-scroller">
-
-    <!--_header-->
     <th:block th:replace="/fragments/_header.html::header"></th:block>
-
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:/partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
           <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark
+          </div>
           <p class="settings-heading mt-2">HEADER SKINS</p>
           <div class="color-tiles mx-0 px-4">
             <div class="tiles success"></div>
@@ -73,36 +55,27 @@
         </div>
       </div>
 
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
       <th:block th:replace="/fragments/_navGestInt.html::navGestInt"></th:block>
-
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold" >Welcome <span th:text="${session.name}" ></span></h3>
-<!--                  <h3 class="font-weight-bold"  id="token" th:text="${accessToken}">Welcome PENE Francine</h3>-->
-<!--                  <h3 class="font-weight-bold"  id="matricule" th:text="${matricule}">Welcome PENE Francine</h3>-->
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                  <input type="text" id="session-matricule" class="d-none" th:value="${session.matricule}" />
+                  <input type="text" id="session-type" class="d-none" th:value="${session.authorithies[0].authority}" />
+                  <h3 class="font-weight-bold">Bienvenue <span th:text="${session.name}"></span></h3>
+                  <h6 class="font-weight-normal mb-0">Profitez de votre systeme de gestion des interventions en quelques
+                    clicks.
                 </div>
                 <div class="col-12 col-xl-4">
-                 <div class="justify-content-end d-flex">
-                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                     <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
+                  <div class="justify-content-end d-flex">
+                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                      <button class="btn btn-sm btn-light bg-white m-2" type="button">
+                        <i class="bi bi-calendar"></i> <span id="currentDate"></span>
+                      </button>
                     </div>
                   </div>
-                 </div>
                 </div>
               </div>
             </div>
@@ -111,7 +84,7 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div class="card-people mt-auto">
-                  <img src="/template/images/dashboard/people.svg" alt="people">
+                  <img src="./images/dashboard/people.png" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
                       <div>
@@ -131,18 +104,18 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Today’s Bookings</p>
-                      <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
+                      <p class="mb-4">Interventions non prises en charge</p>
+                      <p class="fs-30 mb-2" id="int-np">4006</p>
+                      <p id="p-int-np">10.00%</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">Total Bookings</p>
-                      <p class="fs-30 mb-2">61344</p>
-                      <p>22.00% (30 days)</p>
+                      <p class="mb-4">Interventions finalisées</p>
+                      <p class="fs-30 mb-2" id="int-fin">61344</p>
+                      <p id="p-int-fin">22.00%</p>
                     </div>
                   </div>
                 </div>
@@ -151,88 +124,138 @@
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                   <div class="card card-light-blue">
                     <div class="card-body">
-                      <p class="mb-4">Number of Meetings</p>
-                      <p class="fs-30 mb-2">34040</p>
-                      <p>2.00% (30 days)</p>
+                      <p class="mb-4">Interventions en cours de traitement</p>
+                      <p class="fs-30 mb-2" id="int-nt">34040</p>
+                      <p id="p-int-nt">2.00%</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 stretch-card transparent">
                   <div class="card card-light-danger">
                     <div class="card-body">
-                      <p class="mb-4">Number of Clients</p>
-                      <p class="fs-30 mb-2">47033</p>
-                      <p>0.22% (30 days)</p>
+                      <p class="mb-4">Interventions rejetées</p>
+                      <p class="fs-30 mb-2" id="int-rjt">47033</p>
+                      <p id="p-int-rjt">0.22%</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2022.  Client Web ING4-ISI <a href="https://www.institutsaintjean.org/" target="_blank">ISJ-ENT.</a> All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+            <span id="currentYear" class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a
+                href="https://www.institutsaintjean.org/" target="_blank">ISJ-ENT</a>.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">INGE4-ISI<i
+                class="ti-heart text-danger ml-1"></i></span>
           </div>
         </footer>
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-      <th:block th:replace="fragments/_modalsIntervention.html::modalsIntervention"></th:block>
+    <th:block th:replace="fragments/_modalsIntervention.html::modalsIntervention"></th:block>
 
 
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
   <script src="/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
   <script src="/js/off-canvas.js"></script>
   <script src="/js/hoverable-collapse.js"></script>
   <script src="/js/template.js"></script>
   <script src="/js/settings.js"></script>
-<script src="/js/todolist.js"></script>
-<script th:inline="javascript">
-  // matricule
-  var token = /*[[${matricule}]]*/ 'valeur_par_defaut';
-  var matricule = /*[[${matricule}]]*/ 'valeur_par_defaut';
-</script>
-<script src="/js/creerIntervention.js"></script>
+  <script src="/js/todolist.js"></script>
+  <script th:inline="javascript">
+    var token = /*[[${matricule}]]*/ 'valeur_par_defaut';
+    var matricule = /*[[${matricule}]]*/ 'valeur_par_defaut';
+    var type = $("#session-type").val();
+    var path = "http://localhost:9090/api/interventions/";
+    var datas;
 
-<!--<script src="/js/pIntervention.js"></script>-->
-  
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+    // date actuelle
+    var currentDateElement = document.getElementById("currentDate");
+    var dateActuelle = new Date();
+    var joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    var moisAnnee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    var jourSemaine = joursSemaine[dateActuelle.getDay()];
+    var jourMois = dateActuelle.getDate();
+    var mois = moisAnnee[dateActuelle.getMonth()];
+    var annee = dateActuelle.getFullYear();
+    var dateFormatee = jourSemaine + ' le ' + jourMois + ', ' + mois + ' ' + annee;
+    currentDateElement.textContent = dateFormatee;
+
+    // annee actuelle
+    var currentYearElement = document.getElementById("currentYear");
+    currentYearElement.textContent += " " + annee;
+
+    // statistique sur le dashboard
+    var begin = 0;
+    var total = [0, 0, 0, 0];
+    var pourcent = [0, 0, 0, 0];
+
+
+    var tabtotal = ["int-np", "int-fin", "int-nt", "int-rjt"];
+    var tabpourcent = ["p-int-np", "p-int-fin", "p-int-nt", "p-int-rjt"];
+    // affichage des donnees
+    for (let i = 0; i < 4; i++) {
+      $("#" + tabtotal[i]).text(total[i]);
+      $("#" + tabpourcent[i]).text(pourcent[i].toFixed(2) + " %");
+    }
+    type == "Admin" ? path += "Liste/Departement/" + matricule : path += "Liste/etudiant/" + matricule
+    console.log(type, path);
+    $(function () {
+  $.ajax({
+    url: path,
+    type: 'GET',
+    success: function (response) {
+      datas = response;
+      var total = [0, 0, 0, 0];
+      var pourcent = [0, 0, 0, 0];
+
+      for (let i = 0; i < datas.length; i++) {
+        if (datas[i].statut == "nonTraite") {
+          total[0]++;
+        } else if (datas[i].statut == "traite") {
+          total[1]++;
+        } else if (datas[i].statut == "enCours") {
+          total[2]++;
+        } else {
+          total[3]++;
+        }
+      }
+      var totalCount = datas.length;
+      for (let i = 0; i < total.length; i++) {
+        pourcent[i] = ((total[i] / totalCount) * 100).toFixed(2); // Calcul des pourcentages
+      }
+
+      for (let i = 0; i < 4; i++) {
+        $("#" + tabtotal[i]).text(total[i]+"/"+totalCount);
+        $("#" + tabpourcent[i]).text(pourcent[i] + " %"); // Affichage des pourcentages
+      }
+      // Calcul des pourcentages ou autre traitement ici
+    },
+    error: function (xhr, status, error) {
+      console.error('La requête a échoué avec le statut ' + status);
+    }
+  });
+});
+
+// setInterval(makeAjaxRequest, 1000);
 
 
 
- <!-- plugins:js -->
- <!-- endinject -->
- <!-- Plugin js for this page -->
- <script src="/vendors/chart.js/Chart.min.js"></script>
- <script src="/vendors/datatables.net/jquery.dataTables.js"></script>
- <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
- <script src="js/dataTables.select.min.js"></script>
+  </script>
+  <script src="/js/creerIntervention.js"></script>
+  <script src="/vendors/chart.js/Chart.min.js"></script>
+  <script src="/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.select.min.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/Chart.roundedBarCharts.js"></script>
+  <script th:src="@{/sweetalert2/sweetalert2.all.js}"></script>
+  <script th:src="@{/sweetalert2/sweetalert2.js}"></script>
 
- <!-- endinject -->
- <!-- Custom js for this page-->
- <script src="/js/dashboard.js"></script>
- <script src="/js/Chart.roundedBarCharts.js"></script>
-
-<!-- plugins:js -->
-<!--<th:block th:replace="/fragments/_js.html::js"></th:block>-->
-
-</div>
-<!-- End custom js for this page-->
+  <script>
+  </script>
 </body>
 
 </html>

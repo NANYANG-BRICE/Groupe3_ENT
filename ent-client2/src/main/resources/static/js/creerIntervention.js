@@ -1,167 +1,181 @@
 // var token = '[[${accessToken}]]'
 var fileName = 'load'
-var listeObjets = [ ];
+var listeObjets = [];
 
 
-// Appeler la fonction pour charger les options lors du chargement de la page
-$(document).ready(function() {
-    // token=$('#token').text();
-    console.log(token);
-    // console.log(matricule);
+$(document).ready(function () {
     listeIntervention();
-    $('#yourFormId').submit(function(event) {
-        event.preventDefault(); // Empêche la soumission normale du formulaire
-
-        var codeEtudiant = 1 // Récupérez la valeur du champ code étudiant
-        var idCategorie = 2// Récupérez la valeur du champ id catégorie
-
+    $('#yourFormId').submit(function (event) {
+        event.preventDefault();
+        var codeEtudiant = 1
+        var idCategorie = 2
         poserintervention(codeEtudiant, idCategorie);
     });
 
 });
-// Attacher un gestionnaire d'événement à l'élément select
-$('#intervention').change(
-    function() {
-    // Récupérer la valeur sélectionnée
-    var idCategorie = $(this).val();
-    // Afficher la valeur dans la console (vous pouvez faire autre chose avec cette valeur)
-    console.log("La valeur sélectionnée est : " + idCategorie);
-    listesousIntervention(idCategorie)
-}
 
+$('#intervention').change(
+    function () {
+        var idCategorie = $(this).val();
+        listesousIntervention(idCategorie)
+    }
 );
+
 $('#file').change(function (event) {
     loadFile(event);
 });
 
 
 
-function chargerOptionsSelectIntervention(liste,id) {
+function chargerOptionsSelectIntervention(liste, id) {
     var select = $(id);
-    // Effacer les options existantes
-    // select.empty();
-    // Ajouter les nouvelles options à partir de la liste d'objets
-    $.each(liste, function(index, objet) {
+    $.each(liste, function (index, objet) {
         select.append('<option value="' + objet.idCategorie + '">' + objet.intituleCategorie + '</option>');
     });
 }
-function chargerOptionsSelectSIntervention(liste,id) {
+
+function chargerOptionsSelectSIntervention(liste, id) {
     var select = $(id);
-    // Effacer les options existantes
     select.empty();
-    // Ajouter les nouvelles options à partir de la liste d'objets
-    $.each(liste, function(index, objet) {
+    $.each(liste, function (index, objet) {
         select.append('<option value="' + objet.idSousIntervention + '">' + objet.intituleSousIntervention + '</option>');
     });
 }
-function listeIntervention(){
+
+function listeIntervention() {
     $.ajax({
         url: 'http://localhost:9090/api/interventions/categorie/Liste',
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
-            listeObjets=data
-            console.log('Réponse de l\'API:', data);
-            chargerOptionsSelectIntervention(listeObjets,'#intervention');
-            // Vous pouvez manipuler les données ici
+        success: function (data) {
+            listeObjets = data
+            chargerOptionsSelectIntervention(listeObjets, '#intervention');
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Erreur lors de la requête API:', status, error);
         }
     });
-}
-// var accessToken = ''  ;
-function listesousIntervention(idCategorie){
-    $.ajax({
-        url: 'http://localhost:9090/api/interventions/categorie/sousIntervention/'+idCategorie,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            listeObjets=data
-            console.log('Réponse de l\'API:', data);
-            chargerOptionsSelectSIntervention(listeObjets,'#sous-intervention');
-            // Vous pouvez manipuler les données ici
-        },
-        error: function(xhr, status, error) {
-            console.error('Erreur lors de la requête API:', status, error);
-        }
-    });
-}
-function interventionbyId(id){
-    $.ajax({
-        url: 'http://localhost:9090/api/interventions/'+id,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            console.log('Réponse de l\'API:', data);
-            // Vous pouvez manipuler les données ici
-        },
-        error: function(xhr, status, error) {
-            console.error('Erreur lors de la requête API:', status, error);
-        }
-    });
-}
-function afficherIntervention(intervention){
-    console.log(intervention)
 }
 
-// var accessToken = '
+
+function listesousIntervention(idCategorie) {
+    $.ajax({
+        url: 'http://localhost:9090/api/interventions/categorie/sousIntervention/' + idCategorie,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            listeObjets = data
+            chargerOptionsSelectSIntervention(listeObjets, '#sous-intervention');
+        },
+        error: function (xhr, status, error) {
+            console.error('Erreur lors de la requête API:', status, error);
+        }
+    });
+}
+
 var selectedFiles
-function loadFile(event){
+function loadFile(event) {
     selectedFiles = event.target.files;
     console.log(selectedFiles);
 
     if (selectedFiles.length > 0) {
         fileName = selectedFiles[0].name + " ' et " + (selectedFiles.length - 1) + " autres fichier(s)'";
         console.log(fileName);
-
         $('#download').text(fileName);
-        // Vous pouvez utiliser la variable fileName comme nécessaire ici
     }
 }
-function poserintervention(codeEtudiant, idCategorie,dataS){
+
+
+function poserintervention(codeEtudiant, idCategorie, dataS) {
     var url = 'http://localhost:9090/api/interventions/soumettre/' + codeEtudiant + '/' + idCategorie;
+    Swal.fire({
+        title: "Requête en cours",
+        html: "Veuillez patienter quelques instants...",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
     $.ajax({
         url: url,
         type: 'POST',
         data: dataS,
-        processData: false, // empêche jQuery de transformer les données en chaîne de requête
+        processData: false,
         contentType: false,
-        success: function(data) {
-            console.log('Réponse de l\'API:', data);
-            console.log('Réponse de l\'API: Réponse de l\'API: Réponse de l\'API: Réponse de l\'API:');
-            // Manipuler les données ici
+        success: function (data) {
+            Swal.fire({
+                hideOnOverlayClick: false,
+                hideOnContentClick: false,
+                allowOutsideClick: false,
+                title: "Félicitations",
+                html: "Nous sommes heureux de vous annoncer que votre demande d'intervention a bien été soumise.",
+                showConfirmButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+                Swal.close();
+            });
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Erreur lors de la requête API:', status, error);
+            Swal.fire({
+                hideOnOverlayClick: false,
+                hideOnContentClick: false,
+                title: "Opération Impossible",
+                html: "Nous sommes désolés de vous l'annoncer, mais votre demande d'intervention n'a pas pu être soumise.",
+                showConfirmButton: true,
+            }).then(() => {
+                Swal.close();
+            });
         }
     });
 }
-function envoyer(){
-    console.log(matricule)
-    console.log('session')
-    var intervention = document.getElementById('intervention').value;
-    var idSousIntervention = document.getElementById('sous-intervention').value;
-    var DescriptionIntervention = document.getElementById('exampleInputUsername1').value;
-    var piecesJointes = document.getElementById('file').files;
 
-    var formData = new FormData();
 
-// Ajout des valeurs au FormData
-    formData.append('intervention', intervention);
-    formData.append('idSousIntervention', idSousIntervention);
-    formData.append('DescriptionIntervention', DescriptionIntervention);
 
-    for (var key in selectedFiles) {
-        if (selectedFiles.hasOwnProperty(key)) {
-            var file = selectedFiles[key];
-            // Faites quelque chose avec chaque fichier
-            formData.append('pieceJointe', file);
-            console.log(file)
+$(document).ready(function () {
+    $('#envoyer').on('click', function (e) {
+        var intervention = document.getElementById('intervention').value;
+        var idSousIntervention = document.getElementById('sous-intervention').value;
+        var DescriptionIntervention = document.getElementById('exampleInputUsername1').value;
+
+        if (intervention == '' || idSousIntervention == '' || DescriptionIntervention == '') {
+            Swal.fire({
+                title: "Données Absentes.",
+                confirmButtonText: "Continuer",
+                html: "Nous sommes désolés de vous l'annoncer, mais vous devez remplir tous les champs, sauf la <b>Pièce Jointe</b> qui est facultative."
+            });
+        } else {
+            var formData = new FormData();
+            formData.append('intervention', intervention);
+            formData.append('idSousIntervention', idSousIntervention);
+            formData.append('DescriptionIntervention', DescriptionIntervention);
+
+            for (var key in selectedFiles) {
+                if (selectedFiles.hasOwnProperty(key)) {
+                    var file = selectedFiles[key];
+                    formData.append('pieceJointe', file);
+                    console.log(file)
+                }
+            }
+
+            Swal.fire({
+                hideOnOverlayClick: false,
+                hideOnContentClick: false,
+                title: "Êtes-vous sûr(e)?",
+                html: "Souhaitez-vous réellement soumettre cette demande d'intervention ?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: "Continuer",
+                denyButtonText: "Annuler"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    poserintervention(matricule, intervention, formData);
+                }
+            });
         }
-    }
-
-    console.log(DescriptionIntervention);
-    console.log(selectedFiles);
-    poserintervention(matricule,intervention,formData)
-}
+    });
+});

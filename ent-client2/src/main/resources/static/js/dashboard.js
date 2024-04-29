@@ -676,7 +676,12 @@ $('#example tbody').on('click', 'td.details-control', function () {
       tr.addClass('shown');
   }
 } );
-window.$('#table_id').DataTable();
+    window.$('#table_id').DataTable({
+      order: [[0, 'desc']],
+      columnDefs: [
+        { type: 'date', targets: 0 }
+      ]
+    });
   });
 })(jQuery);
 

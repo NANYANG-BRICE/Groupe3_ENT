@@ -1,8 +1,9 @@
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="modalsIntervention">
 
 
-  <div class="modal fade" id="demanderinterventionModal" tabindex="-1" aria-labelledby="demande-interventionModal" aria-hidden="true">
+  <div class="modal fade" id="demanderinterventionModal" tabindex="-1" aria-labelledby="demande-interventionModal"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,7 +11,7 @@
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-<!--          th:action="@{/creerIntervention}" th:method="post" th:object="${intervention}"-->
+          <!--          th:action="@{/creerIntervention}" th:method="post" th:object="${intervention}"-->
           <form class=" form-sample row justify-content-center gap-3">
             <div class="form-group">
               <label for="class" class="form-label">Choisissez une intervention</label>
@@ -22,81 +23,76 @@
               <label for="class" class="form-label">Choisissez une sous-intervention</label>
               <select name="level" id="sous-intervention" class="form-select">
               </select>
-
-              <!--                <label for="monSelect">Sélectionnez une option :</label>-->
-              <!--                <select id="monSelect"></select>-->
-
-
             </div>
 
             <div class="form-group">
-              <label for="class" class="form-label">Entrer une description</label>
-              <input type="text-area" class="form-control" id="exampleInputUsername1" placeholder="Description">
+              <label for="exampleInputUsername1" class="form-label">Entrer une description</label>
+              <textarea cols="30" rows="3" class="form-control" id="exampleInputUsername1" placeholder="Description"
+                oninput="getInfosDescription()"></textarea>
+              <span class="text-danger float-end" style="font-size: 0.8rem;" id="text-description">Vous avez entrez :
+                0/100 caractères</span>
             </div>
 
-            <!--              <button id="load" th:onclick="greetWorld()">using no variable</button>-->
-
             <label id="download" class="form-group custom-file-upload">
-              <input type="file" multiple id="file"  formControlName="file" /><i
-                    class="ti-download"></i>
+              <input type="file" multiple id="file" formControlName="file" accept=".png, .jpg, .jpeg"
+                onchange="checkFile(event)" /><i class="ti-download"></i>
               Charger des fichiers
             </label>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">Fermer</button>
-          <a th:href="@{listeIntervention}">
-            <input onclick="envoyer()" type="submit" id="envoyer" class="btn btn-primary" value="Envoyer">
-
-          </a>
-<!--          <input th:onclick="'envoyer(\'' + ${matricule} + '\')'" type="submit" id="envoyer" class="btn btn-primary" value="Envoyer">-->
-
+          <button type="button" id="envoyer" class="btn btn-primary">Envoyer</button>
         </div>
       </div>
     </div>
-  </div><!-- Fin Modal demande d'intervention -->
-  <div class="modal fade" id="interventionDetailsModal" tabindex="-1" aria-labelledby="details-interventionModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-title">Details de l'intervention</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="class" class="form-label">Numero intervention : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Matricule etudiant :</label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Departement :</label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Type de l'intervention : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Sous-intervention : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Date d'initiation : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Description : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Statut : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Piece jointe : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Traite par : </label></div>
-          <div class="form-group">
-            <label for="class" class="form-label">Reponse : </label></div>
-        </div>
+  </div>
 
-      </div>
-    </div>
-  </div><!-- Fin Modal demande d'intervention -->
+  <script>
 
+
+    function checkFile(event) {
+      const input = event.target;
+      if (!input.files || !input.files.length) {
+        return;
+      }
+      const files = Array.from(input.files);
+      const invalidFiles = files.filter(file => {
+        const acceptedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        return !acceptedTypes.includes(file.type);
+      });
+      if (invalidFiles.length) {
+        Swal.fire({
+          title: "Pièce Jointe Invalide.",
+          confirmButtonText: "Continuer",
+          html: "Nous sommes désolés de vous l'annoncer, mais seuls les fichiers images au format <b>PNG</b>, <b>JPG</b> et <b>JPEG</b> sont autorisés.",
+        });
+        input.value = '';
+      }
+    }
+
+    function getInfosDescription() {
+      const maxLength = 100;
+      const descriptionInput = $('#exampleInputUsername1');
+      const description = descriptionInput.val();
+      const descriptionLength = description.length;
+      const descriptionText = $('#text-description');
+
+      if (descriptionLength <= maxLength) {
+        descriptionText.text(`Vous avez entré : ${descriptionLength}/${maxLength} caractères`);
+      } else {
+        descriptionInput.val(description.slice(0, maxLength));
+        descriptionText.text(`${maxLength}/${maxLength} caractères`);
+      }
+    }
+  </script>
   <!--Fait-->
 </th:block>
 
 <th:block th:fragment="modalsValidationIntervention">
 
-  <div class="modal fade" id="terminerInterventionModal" tabindex="-1" aria-labelledby="terminer-interventionModal" aria-hidden="true">
+  <div class="modal fade" id="terminerInterventionModal" tabindex="-1" aria-labelledby="terminer-interventionModal"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -104,24 +100,18 @@
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <input type="text" id="intervention-end-id" class="form-control bg-white text-dark" readonly>
           <div class="form-group">
             <label for="float-input" style="font-weight: 800; color: black;">Mail</label>
-            <textarea class="form-control" style="height: fit-content; width: 100%;min-height: 300px" formControlName="mail" id="float-input"></textarea>
+            <textarea class="form-control" style="height: fit-content; width: 100%;min-height: 320px"
+              formControlName="mail" id="float-input"></textarea>
           </div>
-            <label id="downloads" class="form-group custom-file-upload">
-              <input type="file" id="files" multiple onchange="loadFileS(event)"  formControlName="files" />
-              <i class="bi bi-download"></i>
-
-              Chargez le fichier
-            </label>
-
-          <a th:href="@{listeInterventionParDepartement}">
-            <label class="custom-send-reponse" onclick="envoyerR()">
-              <i class="bi bi-send"></i>
-              Envoyer
-            </label>
-          </a>
-
+          <label id="downloads" class="form-group custom-file-upload">
+            <input type="file" id="files" formControlName="file" accept=".pdf, .png, .jpg, .jpeg"
+            onchange="checkFile(event)" />
+            <i class="bi bi-download"></i> Chargez le fichier
+          </label>
+          <button type="button" id="finaliser-demande" class="btn btn-primary">Envoyer</button>
         </div>
 
       </div>
